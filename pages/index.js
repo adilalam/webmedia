@@ -9,6 +9,7 @@ export default class HomePage extends React.Component {
     this.state = {
       recording: false,
       videos: [],
+      chageSide: false,
     };
   }
 
@@ -17,9 +18,11 @@ export default class HomePage extends React.Component {
       video: {
         width: 1280,
         height: 720,
-        facingMode: {
-          exact: "environment",
-        },
+        facingMode: this.state.chageSide
+          ? "user"
+          : {
+              exact: "environment",
+            },
       },
       audio: false,
     });
@@ -96,7 +99,13 @@ export default class HomePage extends React.Component {
           {recording && (
             <button onClick={(e) => this.stopRecording(e)}>Stop</button>
           )}
+          <button
+            onClick={() => this.setState({ chageSide: !this.state.chageSide })}
+          >
+            {this.state.chageSide ? "Take Back Side" : "Take Front  Side"}
+          </button>
         </div>
+
         <div>
           <h3>Recorded videos:</h3>
           {videos.map((videoURL, i) => (
