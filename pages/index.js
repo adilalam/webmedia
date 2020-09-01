@@ -18,11 +18,9 @@ export default class HomePage extends React.Component {
       video: {
         width: 1280,
         height: 720,
-        facingMode: this.state.chageSide
-          ? "user"
-          : {
-              exact: "environment",
-            },
+        facingMode: {
+          exact: this.state.chageSide ? "user" : "environment",
+        },
       },
       audio: false,
     });
@@ -102,7 +100,7 @@ export default class HomePage extends React.Component {
           <button
             onClick={() => this.setState({ chageSide: !this.state.chageSide })}
           >
-            {this.state.chageSide ? "Take Back Side" : "Take Front  Side"}
+            {this.state.chageSide ? "Take Back Side" : "Take Front Side"}
           </button>
         </div>
 
