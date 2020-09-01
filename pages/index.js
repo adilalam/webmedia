@@ -19,7 +19,7 @@ export default class HomePage extends React.Component {
         width: 1280,
         height: 720,
         facingMode: {
-          exact: !this.state.chageSide ? "user" : "environment",
+          exact: this.state.chageSide ? "user" : "environment",
         },
       },
       audio: false,
