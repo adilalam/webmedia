@@ -14,11 +14,14 @@ export default class HomePage extends React.Component {
 
   async componentDidMount() {
     const stream = await navigator.mediaDevices.getUserMedia({
-      video: true,
-      audio: false,
-      facingMode: {
-        exact: "environment",
+      video: {
+        width: 1280,
+        height: 720,
+        facingMode: {
+          exact: "environment",
+        },
       },
+      audio: false,
     });
     // show it to user
     this.video.srcObject = stream;
