@@ -14,12 +14,12 @@ export default class HomePage extends React.Component {
   }
 
   async componentDidMount() {
-    const stream = await navigator.mediaDevices.getUserMedia({
+    const stream = await navigator.mediaDevices.getUserMedia({  
       video: {
         width: 1280,
         height: 720,
         facingMode: {
-          exact: this.state.chageSide ? "user" : "environment",
+          exact: !this.state.chageSide ? "user" : "environment",
         },
       },
       audio: false,
@@ -29,7 +29,7 @@ export default class HomePage extends React.Component {
     this.video.play();
     // init recording
     this.mediaRecorder = new MediaRecorder(stream, {
-      mimeType: videoType,
+      // mimeType: videoType,
     });
     // init data storage for video chunks
     this.chunks = [];
@@ -50,6 +50,10 @@ export default class HomePage extends React.Component {
     // say that we're recording
     this.setState({ recording: true });
   }
+
+  pauseStream() {
+    this.video.srcObject.pauseStream();
+  };
 
   stopRecording(e) {
     e.preventDefault();
@@ -97,6 +101,7 @@ export default class HomePage extends React.Component {
           {recording && (
             <button onClick={(e) => this.stopRecording(e)}>Stop</button>
           )}
+          <button onClick={this.pauseStream}>Pause</button>
           <button
             onClick={() => this.setState({ chageSide: !this.state.chageSide })}
           >
